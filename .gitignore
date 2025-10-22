@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+ParkingCar_Data/
+yolo_dataset/
+Slot Detection.v1i.yolov11/test/
+Slot Detection.v1i.yolov11/valid/
+Slot Detection.v1i.yolov11/train/
+
+yolo11m.pt
+yolo11n.pt
+yolo11s.pt
+yolo11x.pt
