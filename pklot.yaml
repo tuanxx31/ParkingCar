@@ -1,7 +1,0 @@
-path: E:/Code/TGMT/ParkingLot/yolo_dataset  # thư mục gốc dataset
-train: images/train
-val: images/val
-
-names:
-  0: empty
-  1: occupied

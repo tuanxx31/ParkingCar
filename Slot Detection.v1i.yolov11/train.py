@@ -11,6 +11,7 @@ def main():
         workers=4,    # fix thêm để tránh lỗi spawn
         cache=True,
         amp=True
+        # lr0=0.001
     )
 
 if __name__ == "__main__":
