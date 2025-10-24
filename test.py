@@ -2,35 +2,32 @@ from ultralytics import YOLO
 import cv2
 
 # Load model
-model = YOLO("best_renamed.pt")
+model = YOLO("best.pt")
 
-img_path = "ParkingCar_Data/CarParkProject/carParkImg.png"
+img_path = "ParkingCar_Data/CarParkProject/carParkImg_5.jpg"
 
-# Predict
 results = model(img_path)
 
-# img = cv2.imread(img_path)
+names = model.names
+for res in results:
+    img = res.orig_img.copy()
 
-i = 0
-for result in results:
-    boxes = result.boxes  # Boxes object for bounding box outputs
-    masks = result.masks  # Masks object for segmentation masks outputs
-    keypoints = result.keypoints  # Keypoints object for pose outputs
-    probs = result.probs  # Probs object for classification outputs
-    obb = result.obb  # Oriented boxes object for OBB outputs
-    class_ids = result.boxes.cls.int().tolist()
+    for box in res.boxes:
+        # Lấy toạ độ
+        x1, y1, x2, y2 = map(int, box.xyxy[0])
+        cls_id = int(box.cls.item())
+        conf = float(box.conf.item())
+        label = f"{names[cls_id]} {conf:.2f}"
 
-    print(class_ids)
+        # Chọn màu theo class
+        color = (0, 255, 0) if cls_id == 0 else (0, 0, 255)  # xanh cho empty, đỏ cho occupied
 
-    empty_count = class_ids.count(1)      
-    occupied_count = class_ids.count(0)   
+        # Vẽ bounding box
+        cv2.rectangle(img, (x1, y1), (x2, y2), color, 2)
+        cv2.putText(img, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX,
+                    0.7, color, 2)
 
-    print("Empty slots:", empty_count)
-    print("Occupied slots:", occupied_count)
-    # result.show()  # display to screen
-    img = result.orig_img.copy()
-    result.plot()
-    
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+    # Hiển thị ảnh
+    cv2.imshow("Result", img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()

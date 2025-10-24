@@ -1,9 +1,15 @@
 import cv2
+from ultralytics import YOLO
 
 img_path = "ParkingCar_Data/CarParkProject/carParkImg.png"
 
-img = cv2.imread(img_path)
+model = YOLO("best.py")
 
-cv2.imshow("Image", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+results = model(img_path)
+names = model.names
+for result in results:
+    boxes = result.boxes
+    for box in boxes:
+        x1, y1, x2, y2 = box
+        class_id = box.cls.int()
+        
