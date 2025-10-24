@@ -1,4 +1,2 @@
-# PyTorch với CUDA 11.8
-torch
-torchvision
-torchaudio
+ultralytics
+opencv-python

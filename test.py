@@ -29,7 +29,8 @@ for result in results:
     print("Occupied slots:", occupied_count)
     # result.show()  # display to screen
     img = result.orig_img.copy()
+    result.plot()
+    
 
-
-
+cv2.waitKey(0)
 cv2.destroyAllWindows()
