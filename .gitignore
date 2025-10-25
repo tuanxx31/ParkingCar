@@ -15,4 +15,11 @@ yolo11x.pt
 .idea
 .DS_Store
 
-/train/dataset/
+/train/dataset/*
+!/train/dataset/dataset.txt
+
+/model/*
+!/model/model.txt
+
+/test/*
+!/test/data.txt

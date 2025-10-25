@@ -1,12 +1,12 @@
 from ultralytics import YOLO
 
 def main():
-    model = YOLO("yolo11m.pt")
+    model = YOLO("yolo11x.pt")
     model.train(
         data="data.yaml",
-        epochs=50,
+        epochs=100,
         imgsz=640,
-        batch=32,
+        batch=20,
         device=0,     # GPU RTX 3060
         workers=4,    # fix thêm để tránh lỗi spawn
         cache=True,

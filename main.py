@@ -1,10 +1,11 @@
 import cv2
 from ultralytics import YOLO
 
-video_path = "ParkingCar_Data\CarParkProject\carPark.mp4" 
+# video_path = "ParkingCar_Data\yolo11-parkinglot-main\parking1.mp4" 
+video_path = "ParkingCar_Data\CarParkProject\carPark.mp4"
 cap = cv2.VideoCapture(video_path)
 
-model = YOLO("best.pt")
+model = YOLO(r"model\v2\best.pt")
 
 names = model.names
 colors = {
@@ -29,7 +30,7 @@ while True:
             conf = float(box.conf.item())
             cx, cy, w, h = map(int, box.xywh[0])  
             
-            if conf > 0.5 and class_id == 1:
+            if class_id == 1:
                 empty_count +=1
                 cv2.rectangle(frame, (x1, y1), (x2, y2), colors[class_id], 2)
 

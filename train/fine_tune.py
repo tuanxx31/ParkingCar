@@ -1,20 +1,17 @@
 from ultralytics import YOLO
 
 def main():
-    # Load lại model đã train trên Dataset 1
     model = YOLO(r"E:\Code\TGMT\ParkingCar\model\v2\best.pt")
-
-    # Fine-tune trên Dataset 2
     model.train(
-        data="data.yaml",  # YAML của dataset mới
-        epochs=40,
+        data="data2.yaml",
+        epochs=30,
         imgsz=640,
         batch=32,
-        device=0,     # GPU RTX 3060
+        device=0,
         workers=4,
         cache=True,
         amp=True,
-        resume=False   # KHÔNG resume log cũ, mà train lại trên dữ liệu mới
+        resume=True   # nối tiếp training
     )
 
 if __name__ == "__main__":
