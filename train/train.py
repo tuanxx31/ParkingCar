@@ -7,8 +7,8 @@ def main():
         epochs=10,
         imgsz=640,
         batch=20,
-        device=0,     # GPU RTX 3060
-        workers=4,    # fix thêm để tránh lỗi spawn
+        device=0,     
+        workers=4,    
         cache=True,
         amp=True
     )
