@@ -50,7 +50,7 @@ def detect_video(video_path, model_path="model/v5/best.pt", threshold=0.25):
                     cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
         cv2.imshow("Parking Detection", frame)
 
-        if cv2.waitKey(500) & 0xFF == ord('q'):
+        if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
     cap.release()

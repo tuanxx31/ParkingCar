@@ -6,5 +6,5 @@ from detect_video import detect_video
 model_path = "model/v5/best.pt"
 
 if __name__ =="__main__":
-    detect_image(r"test/2013-03-13_07_10_01.jpg")
-    # detect_video("test/parking1.mp4",model_path,0.5)
+    detect_image("test/0.png")
+    # detect_video("test/carPark.mp4",model_path,0.2)
