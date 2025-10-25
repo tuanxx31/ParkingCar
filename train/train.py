@@ -1,10 +1,10 @@
 from ultralytics import YOLO
 
 def main():
-    model = YOLO("yolo11x.pt")
+    model = YOLO("yolo11l.pt")
     model.train(
         data="data.yaml",
-        epochs=100,
+        epochs=10,
         imgsz=640,
         batch=20,
         device=0,     # GPU RTX 3060
