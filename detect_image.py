@@ -4,11 +4,11 @@ from conf import colors
 from utils import draw_polygon
 
 
-def detect_image(img_path, model_path=r"model\v2\best.pt", threshold=0.25):
+def detect_image(img_path, model_path="model/v5/best.pt", threshold=0.25):
     model = YOLO(model_path)
     names = model.names
 
-    results = model(img_path, device=0)
+    results = model(img_path)
     empty_count = 0
 
     for result in results:

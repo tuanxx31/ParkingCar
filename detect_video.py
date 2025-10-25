@@ -3,18 +3,27 @@ from ultralytics import YOLO
 from conf import colors
 from utils import draw_polygon
 
-def detect_video(video_path, model_path=r"model\v2\best.pt", threshold=0.25):
+
+
+def detect_video(video_path, model_path="model/v5/best.pt", threshold=0.25):
     cap = cv2.VideoCapture(video_path)
     model = YOLO(model_path)
     names = model.names
+
+    frame_count = 0
+    frame_skip = 2
 
     while True:
         ret, frame = cap.read()
         if not ret:
             break  
+        
+        frame_count += 1
+        if frame_count % frame_skip != 0:
+            continue
 
-        frame = cv2.medianBlur(frame, 3)
-        results = model(frame, device=0, iou=0.5, verbose=False)
+        # frame = cv2.medianBlur(frame, 3)
+        results = model(frame, iou=0.5, verbose=False)
 
         empty_count = 0
         for result in results:
@@ -41,7 +50,7 @@ def detect_video(video_path, model_path=r"model\v2\best.pt", threshold=0.25):
                     cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
         cv2.imshow("Parking Detection", frame)
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        if cv2.waitKey(500) & 0xFF == ord('q'):
             break
 
     cap.release()
