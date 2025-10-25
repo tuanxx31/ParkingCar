@@ -1,12 +1,12 @@
 import cv2
 from ultralytics import YOLO
 
-from main import colors
+from conf import colors
 
-def detect_video(video_path):
+def detect_video(video_path,model_path=r"model\v2\best.pt",threshold=0.25):
     cap = cv2.VideoCapture(video_path)
 
-    model = YOLO(r"model\v2\best.pt")
+    model = YOLO(model_path)
 
     names = model.names
 
@@ -27,7 +27,7 @@ def detect_video(video_path):
                 conf = float(box.conf.item())
                 cx, cy, w, h = map(int, box.xywh[0])  
                 
-                if class_id == 1:
+                if box.conf >= threshold and class_id == 1:
                     empty_count +=1
                     cv2.rectangle(frame, (x1, y1), (x2, y2), colors[class_id], 2)
 

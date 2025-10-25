@@ -1,10 +1,11 @@
 import cv2
 from ultralytics import YOLO
 
-from main import colors
+from conf import colors
 
-def detect_image(img_path):
-    model = YOLO(r"model\v2\best.pt")
+
+def detect_image(img_path,model_path=r"model\v2\best.pt",threshold=0.25):
+    model = YOLO(model_path)
     names = model.names
 
     results = model(img_path,device=0)
@@ -21,7 +22,7 @@ def detect_image(img_path):
             conf = float(box.conf.item())
             cx, cy, w, h = map(int, box.xywh[0])  
             
-            if conf > 0.5 and class_id == 1:
+            if conf >= threshold and class_id == 1:
                 cv2.rectangle(frame, (x1, y1), (x2, y2), colors[class_id], 2)
 
                 cv2.putText(frame, f"{class_name} {conf:.2f}", (x1, y1 - 10),

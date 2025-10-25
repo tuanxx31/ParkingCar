@@ -1,11 +1,10 @@
 
+
 from detect_image import detect_image
+from detect_video import detect_video
 
-
-colors = {
-    1: (0, 255, 0),  
-    0: (0, 0, 255),  
-}
+model_path = r"model\v2\best.pt"
 
 if __name__ =="__main__":
-    detect_image()
+    # detect_image(r"ParkingCar_Data\CarParkProject\carParkImg_2.jpg")
+    detect_video(r"test\carPark.mp4")
