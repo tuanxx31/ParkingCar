@@ -47,10 +47,7 @@ def detect_video(video_path, model_path="model/v5/best.pt", threshold=0.25, gate
                     slot_top_left = (x1, y1)
                     slot_bottom_right = (x2, y2)
 
-                    draw_rectangle(frame, slot_top_left, slot_bottom_right,
-                                   color=(0, 255, 0),
-                                   label=class_name,
-                                   conf=conf)
+                    
 
                     slot_center = get_center_rectangle(slot_top_left, slot_bottom_right)
 
@@ -59,6 +56,11 @@ def detect_video(video_path, model_path="model/v5/best.pt", threshold=0.25, gate
                         if dist < min_distance:
                             min_distance = dist
                             nearest_slot = (slot_top_left, slot_bottom_right, slot_center)
+                        
+                    draw_rectangle(frame, slot_top_left, slot_bottom_right,
+                                   color=(0, 255, 0),
+                                   label=class_name,
+                                   conf=conf)
 
         if gate_rect:
             draw_rectangle(frame, gate_rect[0], gate_rect[1],
@@ -73,7 +75,7 @@ def detect_video(video_path, model_path="model/v5/best.pt", threshold=0.25, gate
                            color=(0, 255, 255),
                            label="Nearest")
             cv2.circle(frame, slot_center, 6, (0, 255, 255), -1)
-        
+
         cv2.putText(frame, f"Empty: {empty_count}", (10, 30),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
