@@ -3,7 +3,6 @@ import shutil
 from glob import glob
 import random
 
-# Gốc dữ liệu gốc
 YoloFolder = r"E:\Code\TGMT\ParkingLot\ParkingCar_Data\PKLotYoloData\HasXML"
 SubDirs = [
     "UFPR04/Sunny", "UFPR04/Rainy", "UFPR04/Cloudy",
@@ -11,7 +10,6 @@ SubDirs = [
     "PUCPR/Sunny", "PUCPR/Rainy", "PUCPR/Cloudy"
 ]
 
-# Thư mục output YOLO chuẩn
 output_dir = r"E:\Code\TGMT\ParkingLot\yolo_dataset"
 image_train_dir = os.path.join(output_dir, "images", "train")
 image_val_dir = os.path.join(output_dir, "images", "val")
@@ -25,7 +23,6 @@ percentage_train = 90
 data_list = {"train": [], "valid": []}
 
 def copy_pair(img, split):
-    """Copy ảnh và file txt cùng tên"""
     base = os.path.splitext(os.path.basename(img))[0]
     label = os.path.splitext(img)[0] + ".txt"
 

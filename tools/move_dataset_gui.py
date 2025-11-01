@@ -3,16 +3,15 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 
 def check_label_format(file_path):
-    """Kiểm tra file txt YOLO: Detection hay Segmentation"""
     with open(file_path, "r") as f:
         for line in f:
             parts = line.strip().split()
             if len(parts) <= 1:
                 continue
             values = list(map(float, parts[1:]))
-            if len(values) == 4:        # class + 4 giá trị (x,y,w,h)
+            if len(values) == 4:        
                 return "Detection"
-            elif len(values) > 4 and len(values) % 2 == 0:  # class + nhiều cặp (x,y)
+            elif len(values) > 4 and len(values) % 2 == 0:
                 return "Segmentation"
     return "Unknown"
 
@@ -44,25 +43,22 @@ def move_yolo_segmentation(dataset_dir):
             src_img = os.path.join(img_split, img_file)
             src_txt = os.path.join(lbl_split, base_name + ".txt")
 
-            if os.path.exists(src_txt):  # có file txt trong labels
+            if os.path.exists(src_txt):
                 fmt = check_label_format(src_txt)
 
                 if fmt == "Segmentation":
-                    # move label
                     dst_txt = os.path.join(out_dir, split, "labels", base_name + ".txt")
                     os.makedirs(os.path.dirname(dst_txt), exist_ok=True)
                     shutil.move(src_txt, dst_txt)
                     seg_count += 1
 
-                    # move ảnh
                     dst_img = os.path.join(out_dir, split, "images", img_file)
                     os.makedirs(os.path.dirname(dst_img), exist_ok=True)
                     shutil.move(src_img, dst_img)
                     img_with_seg += 1
                 else:
-                    skipped_det += 1  # detection → bỏ lại
+                    skipped_det += 1
             else:
-                # ảnh không có txt → move ảnh
                 dst_img = os.path.join(out_dir, split, "images", img_file)
                 os.makedirs(os.path.dirname(dst_img), exist_ok=True)
                 shutil.move(src_img, dst_img)
