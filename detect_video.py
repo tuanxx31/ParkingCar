@@ -6,7 +6,7 @@ from utils import draw_rectangle, get_center_rectangle, calc_distance
 def detect_video(video_path, model_path="model/v5/best.pt", threshold=0.25, gate_rect=None):
     cap = cv2.VideoCapture(video_path)
     if not cap.isOpened():
-        print("❌ Không thể mở video.")
+        print("Không thể mở video.")
         return
 
     model = YOLO(model_path)
