@@ -34,39 +34,32 @@ def detect_video(video_path, model_path="model/v5/best.pt", threshold=0.25, gate
         if gate_rect:
             gate_center = get_center_rectangle(*gate_rect)
 
-        # ✅ Duyệt qua tất cả các box detect được
         for result in results:
             for box in result.boxes:
                 class_id = int(box.cls.item())
                 class_name = names[class_id]
                 conf = float(box.conf.item())
 
-                # Chỉ xét ô trống (class_id == 1)
                 if conf >= threshold and class_id == 1:
                     empty_count += 1
 
-                    # Tọa độ hình chữ nhật
                     x1, y1, x2, y2 = map(int, box.xyxy[0])
                     slot_top_left = (x1, y1)
                     slot_bottom_right = (x2, y2)
 
-                    # Vẽ ô trống (xanh lá)
                     draw_rectangle(frame, slot_top_left, slot_bottom_right,
                                    color=(0, 255, 0),
                                    label=class_name,
                                    conf=conf)
 
-                    # Tính tâm ô trống
                     slot_center = get_center_rectangle(slot_top_left, slot_bottom_right)
 
-                    # ✅ Tìm ô gần nhất với cổng
                     if gate_center:
                         dist = calc_distance(slot_center, gate_center)
                         if dist < min_distance:
                             min_distance = dist
                             nearest_slot = (slot_top_left, slot_bottom_right, slot_center)
 
-        # ✅ Vẽ vùng cổng
         if gate_rect:
             draw_rectangle(frame, gate_rect[0], gate_rect[1],
                            color=(255, 0, 0),
@@ -74,15 +67,13 @@ def detect_video(video_path, model_path="model/v5/best.pt", threshold=0.25, gate
             if gate_center:
                 cv2.circle(frame, gate_center, 6, (255, 0, 0), -1)
 
-        # ✅ Vẽ ô trống gần cổng nhất (vàng)
         if nearest_slot:
             slot_top_left, slot_bottom_right, slot_center = nearest_slot
             draw_rectangle(frame, slot_top_left, slot_bottom_right,
                            color=(0, 255, 255),
                            label="Nearest")
             cv2.circle(frame, slot_center, 6, (0, 255, 255), -1)
-
-        # ✅ Hiển thị thông tin
+        
         cv2.putText(frame, f"Empty: {empty_count}", (10, 30),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
 
