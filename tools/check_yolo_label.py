@@ -57,7 +57,6 @@ class YoloLabelViewer:
                     coords = list(map(float, parts[1:]))
 
                     if len(coords) == 4:  
-                        # dạng bbox
                         x, y, bw, bh = coords
                         x1 = int((x - bw/2) * w)
                         y1 = int((y - bh/2) * h)
@@ -65,7 +64,6 @@ class YoloLabelViewer:
                         y2 = int((y + bh/2) * h)
                         pts = [(x1,y1), (x2,y1), (x2,y2), (x1,y2)]
                     else:
-                        # dạng polygon
                         pts = []
                         for i in range(0, len(coords), 2):
                             px = int(coords[i] * w)
@@ -75,7 +73,6 @@ class YoloLabelViewer:
                     class_name = CLASSES[cls]
                     color = COLORS.get(class_name, (255,255,255))
 
-                    # vẽ polygon
                     cv2.polylines(img, [np.array(pts, np.int32)], isClosed=True, color=color, thickness=2)
                     cv2.putText(img, class_name, pts[0], cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2)
 
