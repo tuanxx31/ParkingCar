@@ -15,7 +15,7 @@ def select_gate(video_path):
         print("Không đọc được video.")
         return None
 
-    roi = cv2.selectROI("Chọn vùng cổng (Enter để xác nhận)", frame)
+    roi = cv2.selectROI("Chon vung cong (Enter de xac nhan)", frame)
     cv2.destroyAllWindows()
 
     x, y, w, h = roi
@@ -32,7 +32,7 @@ def select_gate(video_path):
 
 def slect_gate_image(image_path):
     img= cv2.imread(image_path)
-    roi = cv2.selectROI("Chọn vùng cổng (Enter để xác nhận)", img)
+    roi = cv2.selectROI("Chon vung cong (Enter de xac nhan)", img)
     cv2.destroyAllWindows()
     x, y, w, h = roi
     if w == 0 or h == 0:
