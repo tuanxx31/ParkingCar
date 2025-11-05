@@ -5,8 +5,8 @@ fps = int(cap.get(cv2.CAP_PROP_FPS))
 duration = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) / fps)
 
 i = 0
-for t in range(0, duration, 5):  # mỗi 5 giây
-    cap.set(cv2.CAP_PROP_POS_MSEC, t * 1000)  # nhảy đến mốc giây
+for t in range(0, duration, 5):
+    cap.set(cv2.CAP_PROP_POS_MSEC, t * 1000)
     ret, frame = cap.read()
     if ret:
         cv2.imwrite(f"ParkingCar_Data/CarParkProject/carParkImg_{i}.jpg", frame)
