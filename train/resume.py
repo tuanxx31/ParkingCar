@@ -5,10 +5,10 @@ def main():
 
     model.train(
         data="data.yaml",
-        epochs=20,        # tổng số epoch = 30
-        resume=False,     # không resume vì run trước đã kết thúc
+        epochs=20,        
+        resume=False,     
         cos_lr=True,
-        lr0=0.001,        # giảm LR để tinh chỉnh mượt
+        lr0=0.001,        
         batch=20,
         device=0,
         workers=4,

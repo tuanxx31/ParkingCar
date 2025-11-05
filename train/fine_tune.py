@@ -11,7 +11,7 @@ def main():
         workers=4,
         cache=True,
         amp=True,
-        resume=True   # nối tiếp training
+        resume=True   
     )
 
 if __name__ == "__main__":

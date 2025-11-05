@@ -79,7 +79,6 @@ def select_folder():
         entry_dir.delete(0, tk.END)
         entry_dir.insert(0, folder)
 
-# ==== GUI ====
 root = tk.Tk()
 root.title("Move YOLO Segmentation Dataset")
 
