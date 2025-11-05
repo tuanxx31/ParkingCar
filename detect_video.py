@@ -1,7 +1,7 @@
 import cv2
 from ultralytics import YOLO
 from conf import colors
-from utils import draw_polygon, draw_rectangle
+from utils import  draw_rectangle
 
 
 
