@@ -24,7 +24,6 @@ def detect_video(video_path, model_path="model/v5/best.pt", threshold=0.25, gate
         if frame_count % frame_skip != 0:
             continue
 
-        frame = cv2.GaussianBlur(frame, (3, 3), 0)
         results = model(frame, iou=0.5, verbose=False)
 
         empty_count = 0

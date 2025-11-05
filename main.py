@@ -5,7 +5,7 @@ from detect_video import detect_video
 
 model_path = "model/v5/best.pt"
 video_path = "test/carPark.mp4"
-image_path = r"test\0.png"
+image_path = "test/0.png"
 
 
 def select_gate(video_path):
@@ -47,9 +47,9 @@ def slect_gate_image(image_path):
 if __name__ == "__main__":
     # detect_image("test/0.png",model_path,0.4)
     # detect_video("test/testVideo.mp4",model_path,0.2)
-    # gate_rect = select_gate(video_path)
-    # detect_video("test/carPark.mp4", model_path, 0.2, gate_rect)
+    gate_rect = select_gate(video_path)
+    detect_video("test/carPark.mp4", model_path, 0.2, gate_rect)
 
-    gate_rect_image = slect_gate_image(image_path)
-    detect_image(image_path, model_path, 0.2, gate_rect_image)
+    # gate_rect_image = slect_gate_image(image_path)
+    # detect_image(image_path, model_path, 0.2, gate_rect_image)
    
