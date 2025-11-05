@@ -33,5 +33,5 @@ def select_gate(video_path):
 if __name__ == "__main__":
     # detect_image("test/0.png",model_path,0.4)
     # detect_video("test/testVideo.mp4",model_path,0.2)
-    gate_point = select_gate(video_path)
-    detect_video("test/carPark.mp4", model_path, 0.2, gate_point)
+    gate_rect = select_gate(video_path)
+    detect_video("test/carPark.mp4", model_path, 0.2, gate_rect)

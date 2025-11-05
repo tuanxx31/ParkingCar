@@ -1,6 +1,7 @@
 import cv2
 from ultralytics import YOLO
 from utils import draw_rectangle, get_center_rectangle, calc_distance
+from conf import colors
 
 
 def detect_video(video_path, model_path="model/v5/best.pt", threshold=0.25, gate_rect=None):
@@ -58,7 +59,7 @@ def detect_video(video_path, model_path="model/v5/best.pt", threshold=0.25, gate
                             nearest_slot = (slot_top_left, slot_bottom_right, slot_center)
                         
                     draw_rectangle(frame, slot_top_left, slot_bottom_right,
-                                   color=(0, 255, 0),
+                                   color=colors[class_id],
                                    label=class_name,
                                    conf=conf)
 
