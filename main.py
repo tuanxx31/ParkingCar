@@ -1,4 +1,4 @@
-
+import cv2
 
 from detect_image import detect_image
 from detect_video import detect_video

@@ -1,5 +1,5 @@
 import cv2
-import numpy as np
+import math
 
 
 def draw_rectangle(img, x1, y1, x2, y2, color=(0, 255, 0), thickness=2, label=None, conf=None):

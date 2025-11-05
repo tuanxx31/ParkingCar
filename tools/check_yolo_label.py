@@ -4,13 +4,11 @@ import tkinter as tk
 from tkinter import filedialog
 from PIL import Image, ImageTk
 import numpy as np
-# Tên class (theo data.yaml hoặc labels.txt)
 CLASSES = ["occupied", "empty"]
 
-# Màu cho từng class (BGR)
 COLORS = {
-    "occupied": (0, 0, 255),   # đỏ
-    "empty": (0, 255, 0)       # xanh lá
+    "occupied": (0, 0, 255),
+    "empty": (0, 255, 0)
 }
 
 class YoloLabelViewer:
